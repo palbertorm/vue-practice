@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
+    <title>Vue 3</title>
+    <style>
+        .box{
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background-color: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+    body{
+      background: #eee;
+      max-width: 960px;
+      margin: 20px auto;
+    }
+    p, h3, ul{
+      margin: 0;
+      padding: 0;
+    }
+    li{
+      list-style-type: none;
+      background: #fff;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    li.fav{
+      background: #ff9ed2;
+      color: white;
+    }
+    </style>
+</head>
+<body>
+    <h1>Hello Vue 3</h1>
+
+    <div id="app">
+        <div v-if="showProfile">
+            <h2> {{ name }} - {{ profesion }} - {{ age }}</h2>
+            <button v-on:click="age++"> Increase</button>
+            <button v-on:click="age--"> Decrease</button>
+            <div @click="changeName('Elza')">Change the name here </div>
+            <div @click="changeProfesionandAge">Change the Profesion here </div>
+        </div>
+        
+        <button @click="toggleProfile">
+            <span v-if="showProfile">Hide profile</span>
+            <span v-else>Show Profile</span>
+        </button>
+        <div>
+            <span v-show="showProfile">Currently visible while using directive 'show'</span>
+        </div>
+        <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent">mouseleave</div>
+        <div class="box" @dblclick="handleEvent">doubleclick</div>
+        <div class="box" @mousemove="handleMouseMove">Position x: {{ x }} and y: {{ y }}</div>
+        <div>
+            <button @click="toggleBooks"> Click here to see our books </button>
+        </div>
+        <div v-for="book in books"  >
+            <ul v-if="!showBooks">
+                <li :class="{ fav: book.isFav }" @click="changeFav(book)">
+                    <img :src="book.image" :alt="book.title">
+                    <h3>{{ book.title }}: </h3>
+                    <p> -{{ book.author }} </p>
+                </li>
+            </ul>
+        </div>
+        <a :href="url"> Go to goolge</a>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
